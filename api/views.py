@@ -1,8 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from django.shortcuts import get_object_or_404
-
 from api.serializers import PostSerializer
 from page.models import Post
 

@@ -6,7 +6,7 @@
 {% block content %}
 
 <div class="left-panel-custom">
-    <a href="/{{ user.pk }}"><img width="200" src="{{ user.avatar.url }}" alt="avatar {{ user.get_name }}" /></a>
+    <a href="/{{ user.pk }}"><img width="200" src="{% if user.avatar %}{{ user.avatar.url }}{% endif %}" alt="avatar {{ user.get_name }}" /></a>
     <div class="panel-content">
         <div class="panel-group">
             <p class="group-title">{% trans 'First name:' %}</p>
@@ -60,7 +60,7 @@
             <div class="actions">
                 <div class="item">
                     <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    <p class="counter">141</p>
+                    <p class="counter">0</p>
                 </div>
                 <div class="item">
                     <i class="fa fa-share" aria-hidden="true"></i>
@@ -70,6 +70,34 @@
         {% endfor %}
     </div>
 </div>
+
+{% verbatim %}
+
+<script id="post-template" type="x-tmpl-mustache">
+        <div class="post">
+            <div class="post-header">
+                <a href="/{{ data.owner.id }}"><img src="{{ data.owner.avatar }}" /></a>
+                <div class="name-time">
+                    <a href="/{{ data.owner.id }}"><h1>{{ data.owner.name }}</h1></a>
+                    <p>{{ data.created }}</p>
+                </div>
+            </div>
+            <div class="description">
+                <p>{{data.description}}</p>
+            </div>
+            <div class="actions">
+                <div class="item">
+                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+                    <p class="counter">0</p>
+                </div>
+                <div class="item">
+                    <i class="fa fa-share" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+</script>
+
+{% endverbatim %}
 
 <script>
 $(document).ready(function(){
@@ -102,7 +130,11 @@ $("#send_post").click(function(){
         description: $("#post_description").val()
     },
     function(data, status){
-        alert("Data: " + data + "\nStatus: " + status);
+         var template = $('#post-template').html();
+         Mustache.parse(template);
+         var rendered = Mustache.render(template,{data: data});
+
+         $('.posts').prepend(rendered);
     });
 });
 </script>
