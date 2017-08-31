@@ -1,0 +1,60 @@
+{% load staticfiles i18n %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+<script src="{% static 'jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'jquery.scrollify.min.js' %}"></script>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<section class="login-page">
+    <div class="info">
+        <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            <input name="next" type="hidden" value="{{ redirect_to }}" />
+            <select name="language">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                        {{ language.name_local }} ({{ language.code }})
+                    </option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Go" />
+        </form>
+    </div>
+    <div class="login">
+        <div class="page-block">
+            <h2>{% trans 'Login' %}</h2>
+            <form method="post" action="?action=login">
+                {% csrf_token %}
+                {{ login }}
+                <input type="submit" class="login-button" value="{% trans 'Login' %}"/>
+            </form>
+        </div>
+        <div class="page-block">
+            <h2>{% trans 'Register' %}</h2>
+            <form method="post" action="?action=signup">
+                {% csrf_token %}
+                {{ signup }}
+                <input type="submit" class="register-button" value="{% trans 'Signup' %}"/>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="column">Private</div>
+    <div class="column">Open Source</div>
+    <div class="column">Ads free</div>
+    <div class="column">Apolitical</div>
+</section>
+
+<div class="example-classname"></div>
+
+

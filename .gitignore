@@ -1,0 +1,12 @@
+.idea/
+
+.map
+
+media/
+
+.vagrant/
+
+*.log
+
+__pycache__/
+*.py[cod]

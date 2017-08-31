@@ -1,0 +1,7 @@
+Django==1.11.2
+psycopg2
+Pillow
+django-multi-form-view
+ipdb
+django-extensions
+djangorestframework

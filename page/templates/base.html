@@ -1,0 +1,45 @@
+{% load staticfiles i18n %}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <div class="footer">Version: 0.1 beta</div>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'others/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <script src="{% static 'jquery-3.2.1.min.js' %}"></script>
+
+    <header>
+        <nav>
+            <div class="icon">
+                <span class="toggle">☰</span>
+            </div>
+            <div class="logo">
+                <a href="{% url 'wall' %}"><img src="{% static 'images/logo.png' %}"/></a>
+            </div>
+            <div class="search">
+                <form>
+                    <input type="text" placeholder="{% trans 'Search something' %}" />
+                </form>
+            </div>
+            <ul class="navbar-items">
+                <li><a href="{% url 'wall' %}"><i class="fa fa-home" aria-hidden="true"></i> {% trans 'Home page' %}</a></li>
+                <li><a href="{% url 'edit-profile' %}"><i class="fa fa-pencil" aria-hidden="true"></i> {% trans 'Edit profile' %}</a></li>
+                <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> {% trans 'Logout' %}</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="main-section">
+        {% block content %}{% endblock %}
+    </section>
+
+
+</body>
+
+</html>

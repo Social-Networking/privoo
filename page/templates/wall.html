@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load i18n static staticfiles %}
+
+{% block title %}{% trans 'Wall' %}{% endblock %}
+
+{% block content %}
+
+<div class="left-panel-custom">
+    <a href="/{{ user.pk }}"><img width="200" src="{{ user.avatar.url }}" alt="avatar {{ user.get_name }}" /></a>
+    <div class="panel-content">
+        <div class="panel-group">
+            <p class="group-title">{% trans 'First name:' %}</p>
+            <p>{{ user.first_name }}</p>
+        </div>
+        <div class="panel-group">
+            <p class="group-title">{% trans 'Last name:' %}</p>
+            <p>{{ user.last_name }}</p>
+        </div>
+        <div class="panel-group">
+            <p class="group-title">{% trans 'Nick:' %}</p>
+            <p>{{ user.nick }}</p>
+        </div>
+        <div class="panel-group">
+            <p class="group-title">{% trans 'Description:' %}</p>
+            <p>None</p>
+        </div>
+        <div class="panel-group">
+            <p class="group-title">{% trans 'Profile type' %}</p>
+            <p>Public</p>
+        </div>
+    </div>
+</div>
+<div class="right-panel">
+    {% csrf_token %}
+    <div class="post-editor">
+        <textarea id="post_description" class="editable"></textarea>
+        <div class="attach">
+            <div class="attach-left">
+                <i class="fa fa-camera" aria-hidden="true"></i>
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+            </div>
+            <div class="attach-right">
+                <button id="send_post" class="button send">{% trans 'Send' %}</button>
+            </div>
+        </div>
+    </div>
+    <div class="posts">
+        {% for post in posts %}
+        <div class="post">
+            <div class="post-header">
+                <a href="/{{ post.owner.pk }}"><img src="{{ post.owner.avatar.url }}" /></a>
+                <div class="name-time">
+                    <a href="/{{ post.owner.pk }}"><h1>{{ post.owner.get_name }}</h1></a>
+                    <p>{{ post.created }}</p>
+                </div>
+            </div>
+            <div class="description">
+                <p>{{post.description}}</p>
+            </div>
+            <div class="actions">
+                <div class="item">
+                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+                    <p class="counter">141</p>
+                </div>
+                <div class="item">
+                    <i class="fa fa-share" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+    function getCookie(c_name) {
+        if(document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=");
+            if(c_start != -1) {
+                c_start = c_start + c_name.length + 1;
+                c_end = document.cookie.indexOf(";", c_start);
+                if(c_end == -1) c_end = document.cookie.length;
+                return unescape(document.cookie.substring(c_start,c_end));
+            }
+        }
+        return "";
+    }
+
+    $(function () {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken")
+            }
+        });
+    });
+});
+
+
+$("#send_post").click(function(){
+    $.post("/api/posts/",
+    {
+        description: $("#post_description").val()
+    },
+    function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });
+});
+</script>
+
+
+{% endblock %}

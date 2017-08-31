@@ -1,0 +1,255 @@
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: arial, tahoma;
+  list-style: none;
+  /*    outline: 1px solid brown;*/
+}
+
+body {
+  background-color: #e6ecf0;
+  .footer {
+    position: fixed;
+    right: 8px;
+    bottom: 2px;
+  }
+}
+
+
+.features {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.column {
+  margin: 10px;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.login-page {
+    margin: auto;
+    max-width: 960px;
+    height: 100%;
+    background-color: #edeef0;
+    display: flex;
+}
+
+.info {
+    width: 60%;
+}
+.login {
+    width: 40%;
+    margin-top: 20px;
+}
+
+.page-block {
+    position: relative;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+    padding: 25px;
+    margin: 15px;
+}
+
+input {
+    margin-bottom: 15px;
+    width: 270px;
+    font-size: 14px;
+    padding: 6px 12px 8px;
+    box-sizing: border-box;
+    color: #000;
+    padding: 3px 5px;
+    margin: 0;
+    border: 1px solid #d3d9de;
+}
+
+.login-button {
+    padding: 7px 16px 8px;
+    margin: 0;
+    font-size: 12.5px;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,Open Sans,Helvetica Neue,sans-serif;
+    background: none;
+    background-color: #5e81a8;
+    color: #fff;
+    border: 0;
+    border-radius: 2px;
+}
+
+.post-editor {
+    margin: 15px auto;
+    width: 500px;
+    height: 140px;
+    border-radius: 4px;
+    background-color: white;
+    padding: 10px;
+
+    .editable {
+        width: 100%;
+        height: 80px;
+        outline: none;
+        padding: 8px;
+    }
+    .attach {
+        border-top: 1px solid #e6ecf0;
+        padding-top: 5px;
+
+        .fa {
+            font-size: 22px;
+            padding: 9px;
+            color: gray;
+        }
+        .attach-left {
+            float: left;
+        }
+        .attach-right {
+            float: right;
+            .send {
+                margin: 4px;
+            }
+        }
+    }
+}
+
+
+
+.button, .send {
+    background-color: #34495e;
+    border: 0.1rem solid #34495e;
+    border-radius: .4rem;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 700;
+    height: 30px;
+    line-height: 28px;
+    padding: 0 18px;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.edit-profile {
+    margin: 15px auto;
+    padding-top: 50px;
+    width: 500px;
+    border-radius: 4px;
+    background-color: white;
+    padding: 10px;
+}
+
+.main-section {
+    margin: auto;
+    display: flex;
+    padding-top: 50px;
+
+    .left-panel-custom {
+        color: white;
+        position: fixed;
+        float: left;
+        height: 100%;
+        top: 50px;
+        width: 200px;
+        background-color:#2c3e50;
+
+
+        .panel-content {
+            padding: 5px;
+            text-align:center;
+
+            .panel-group {
+                padding: 6px;
+
+                .group-title {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
+    .left-panel {
+
+    }
+
+    .right-panel {
+        width: 100%;
+        margin-left: 200px;
+
+        .posts {
+            width:  100%;
+
+
+        }
+    }
+}
+
+
+.post {
+    width: 500px;
+    margin: auto;
+    background-color: white;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+
+    .post-header {
+        height: 50px;
+        width: 100%;
+        display: flex;
+
+        img {
+            width: 50px;
+            padding: 8px;
+            flex: 0 1 auto;
+        }
+        .name-time {
+            padding-top: 8px;
+            flex: 1 1 auto;
+
+            h1 {
+                font-size: 14px;
+                font-weight: 300;
+            }
+            p {
+                font-size: 10px;
+                color: #7f8c8d;
+            }
+        }
+    }
+    .description {
+        flex: 1 1 auto;
+        padding: 4px 14px 14px 14px;
+        min-height: 65px;
+    }
+
+    .actions {
+        flex: 0 1 auto;
+        display: flex;
+        font-size: 20px;
+        padding: 10px;
+        border-top: 1px solid #e6ecf0;
+
+        .item {
+            margin-right: 5px;
+
+            i {
+                float: left;
+            }
+
+            p {
+                float: left;
+                margin-left: 5px;
+                margin-right: 5px;
+                font-size: 17px;
+            }
+        }
+    }
+}

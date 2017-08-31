@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'Profile' %}{% endblock %}
+
+{% block content %}
+
+    <div class="left-panel-custom">
+        <a href="/{{ object.pk }}"><img width="200" src="{{ object.avatar.url }}" alt="avatar {{ object.get_name }}" /></a>
+        <div class="panel-content">
+            <div class="panel-group">
+                <p class="group-title">{% trans 'First name:' %}</p>
+                <p>{{ object.first_name }}</p>
+            </div>
+            <div class="panel-group">
+                <p class="group-title">{% trans 'Last name:' %}</p>
+                <p>{{ object.last_name }}</p>
+            </div>
+            <div class="panel-group">
+                <p class="group-title">{% trans 'Nick:' %}</p>
+                <p>{{ object.nick }}</p>
+            </div>
+            <div class="panel-group">
+                <p class="group-title">{% trans 'Description:' %}</p>
+                <p>None</p>
+            </div>
+            <div class="panel-group">
+                <p class="group-title">{% trans 'Profile type' %}</p>
+                <p>Public</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <div class="posts">
+            {% for post in posts %}
+            <div class="post">
+                <div class="post-header">
+                    <a href="/{{ post.owner.pk }}"><img src="{{ post.owner.avatar.url }}" /></a>
+                    <div class="name-time">
+                        <a href="/{{ post.owner.pk }}"><h1>{{ post.owner.get_name }}</h1></a>
+                        <p>{{ post.created }}</p>
+                    </div>
+                </div>
+                <div class="description">
+                    <p>{{post.description}}</p>
+                </div>
+                <div class="actions">
+                    <div class="item">
+                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                        <p class="counter">141</p>
+                    </div>
+                    <div class="item">
+                        <i class="fa fa-share" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
