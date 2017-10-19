@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n staticfiles %}
 
 {% block title %}{% trans 'Profile' %}{% endblock %}
 
 {% block content %}
 
     <div class="left-panel-custom">
-        <a href="/{{ object.pk }}"><img width="200" src="{{ object.avatar.url }}" alt="avatar {{ object.get_name }}" /></a>
+        {% if object.avatar %}
+            <a href="/{{ object.pk }}"><img width="200" src="{{ object.avatar.url }}" alt="avatar {{ object.get_name }}" /></a>
+        {% else %}
+            <a href="/{{ object.pk }}"><img width="200" src="{% static 'images/image-placeholder.png' %}" alt="{% trans 'no image' %}" /></a>
+        {% endif %}
         <div class="panel-content">
             <div class="panel-group">
                 <p class="group-title">{% trans 'First name:' %}</p>
@@ -36,7 +40,11 @@
             {% for post in posts %}
             <div class="post">
                 <div class="post-header">
-                    <a href="/{{ post.owner.pk }}"><img src="{{ post.owner.avatar.url }}" /></a>
+                    {% if post.owner.avatar %}
+                        <a href="/{{ post.owner.pk }}"><img src="{{ post.owner.avatar.url }}" /></a>
+                    {% else %}
+                        <a href="/{{ post.owner.pk }}"><img src="{% static 'images/image-placeholder.png' %}" /></a>
+                    {% endif %}
                     <div class="name-time">
                         <a href="/{{ post.owner.pk }}"><h1>{{ post.owner.get_name }}</h1></a>
                         <p>{{ post.created }}</p>
