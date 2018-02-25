@@ -67,11 +67,10 @@
             </div>
             <div class="actions">
                 <div class="item">
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    <p class="counter">0</p>
+                    <i onclick="vote_up({{post.pk}})" class="far fa-thumbs-up" aria-hidden="true"></i>
                 </div>
                 <div class="item">
-                    <i class="fa fa-share" aria-hidden="true"></i>
+                  <p id="counter-{{post.id}}" class="counter">{{post.vote.all|length}}</p>
                 </div>
             </div>
         </div>
@@ -150,6 +149,18 @@ $("#send_post").click(function(){
          $('.posts').prepend(rendered);
     });
 });
+
+function vote_up(postId){
+    $.post("/api/votes/",
+    {
+        post_id: postId
+    },
+    function(data, status){
+        var counter = $('#counter-'+postId);
+        counter.text(parseInt(counter.text())+1)
+    });
+};
+
 </script>
 
 

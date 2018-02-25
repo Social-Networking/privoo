@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from page.models import Post, MyUser
+from page.models import Post, MyUser, Vote
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -21,3 +21,13 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ('description', 'owner', 'created')
+
+
+class VoteSerializer(serializers.ModelSerializer):
+    user = UserSerializer(many=False, read_only=True)
+    vote = serializers.BooleanField(read_only=True)
+    post_id = serializers.IntegerField()
+
+    class Meta:
+        model = Vote
+        fields = ('user', 'date', 'vote', 'post_id')

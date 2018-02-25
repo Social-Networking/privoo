@@ -10,7 +10,6 @@ class Post(models.Model):
     photo = models.ImageField(verbose_name=_("Photo"), null=True, blank=True)
     owner = models.ForeignKey(verbose_name=_("Owner"), to='MyUser', related_name="posts")
     created = models.DateTimeField(verbose_name=_("Created"), auto_now=True)
-    likes = models.ManyToManyField(verbose_name=_("Likes"), to='MyUser', null=True, blank=True, related_name="posts_likes")
 
     class Meta:
         verbose_name = _("Post")
@@ -18,6 +17,13 @@ class Post(models.Model):
 
     def __str__(self):
         return "{} - {}".format(self.owner.email, self.description)
+
+
+class Vote(models.Model):
+    vote = models.BooleanField(verbose_name=_("Vote"))
+    post = models.ForeignKey("Post", related_name="vote")
+    user = models.ForeignKey("MyUser", related_name="vote")
+    date = models.DateField(verbose_name=_("Data dodania"), auto_now=True)
 
 
 # class Notify(models.Model):
